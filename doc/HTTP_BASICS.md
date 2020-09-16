@@ -3,7 +3,7 @@
  **[📜목차](https://github.com/trimstray/nginx-admins-handbook#table-of-contents)** 또는 **[🔎다음단계는 뭘까?](https://github.com/trimstray/nginx-admins-handbook#whats-next)** 부분으로 돌아갈 수 있습니다.
 
 - **[≡ HTTP 기초](#http-basics)**
-  * [소개](#introduction)
+  * [소개](#소개)
   * [기능 및 아키텍처](#features-and-architecture)
   * [HTTP/2](#http2)
     * [HTTP/2를 디버그하는 방법은 무엇인가요?](#how-to-debug-http2)
