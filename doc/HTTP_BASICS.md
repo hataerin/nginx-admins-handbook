@@ -1,26 +1,26 @@
 # HTTP 기초
 
- **[목차](https://github.com/trimstray/nginx-admins-handbook#table-of-contents)** 또는 **[다음단계](https://github.com/trimstray/nginx-admins-handbook#whats-next)** 로 돌아갈 수 있습니다.
+ **[📜목차](https://github.com/trimstray/nginx-admins-handbook#table-of-contents)** 또는 **[🔎다음단계는 뭘까?](https://github.com/trimstray/nginx-admins-handbook#whats-next)** 부분으로 돌아갈 수 있습니다.
 
 - **[≡ HTTP 기초](#http-basics)**
   * [소개](#introduction)
-  * [Features and architecture](#features-and-architecture)
+  * [기능 및 아키텍처](#features-and-architecture)
   * [HTTP/2](#http2)
-    * [How to debug HTTP/2?](#how-to-debug-http2)
+    * [HTTP/2를 디버그하는 방법은 무엇인가요?](#how-to-debug-http2)
   * [HTTP/3](#http3)
   * [URI vs URL](#uri-vs-url)
   * [Connection vs request](#connection-vs-request)
-  * [HTTP Headers](#http-headers)
-    * [Header compression](#header-compression)
-  * [HTTP Methods](#http-methods)
+  * [HTTP 헤더](#http-headers)
+    * [헤더 압축](#header-compression)
+  * [HTTP 메소드](#http-methods)
   * [Request](#request)
     * [Request line](#request-line)
-      * [Methods](#methods)
+      * [메소드](#methods)
       * [Request URI](#request-uri)
-      * [HTTP version](#http-version)
-    * [Request header fields](#request-header-fields)
-    * [Message body](#message-body)
-    * [Generate requests](#generate-requests)
+      * [HTTP 버전](#http-version)
+    * [요청 헤더 필드](#request-header-fields)
+    * [메세지 바디](#message-body)
+    * [요청 생성하기](#generate-requests)
   * [Response](#response)
     * [Status line](#status-line)
       * [HTTP version](#http-version-1)
@@ -32,37 +32,37 @@
   * [Back-End web architecture](#back-end-web-architecture)
   * [Useful video resources](#useful-video-resources)
 
-#### Introduction
+#### 소개
 
-Simply put, HTTP stands for hypertext transfer protocol and is used for transmitting data (e.g. web pages) over the Internet.
+간단히 말해서 HTTP는 하이퍼텍스트 전송 프로토콜을 의미하며 인터넷을 통해 (웹 페이지와 같은) 데이터를 전송하는데 사용됩니다.
 
-Some important information about HTTP:
+HTTP에 관한 몇가지 중요한 정보:
 
-- all requests originate at the client (e.g. browser)
-- the server responds to a request
-- the requests and responses are in readable text
-- the requests are independent of each other and the server doesn’t need to track the requests
+- 모든 요청은 클라이언트(예: 브라우저)에서 시작됩니다.
+- 서버는 요청에 응답합니다.
+- 요청과 응답은 읽을 수 있는 텍스트로 되어있습니다.
+- 요청은 서로 독립적이며 서버는 요청을 추적 할 필요가 없습니다.
 
-I will not describe the HTTP protocol meticulously so you have to look at this as an introduction. I will discuss only the most important things because we have some great documents which describe this protocol in a great deal of detail:
+
+HTTP 프로토콜을 꼼꼼하게 설명하지 않을 것이므로 이것을 소개로 봐야합니다. 이 프로토콜을 아주 자세하게 설명하는 몇가지 훌륭한 문서가 있기 때문에 가장 중요한 것들만 다룰 것입니다.
 
 - [RFC 2616 - HTTP/1.1](https://tools.ietf.org/html/rfc2616) <sup>[IETF]</sup>
-- [RFC 7230 - HTTP/1.1: Message Syntax and Routing](https://tools.ietf.org/html/rfc7230) <sup>[IETF]</sup>
-- [HTTP Made Really Easy](https://www.jmarshall.com/easy/http/)
+- [RFC 7230 - HTTP/1.1: 메세지 문법과 라우팅](https://tools.ietf.org/html/rfc7230) <sup>[IETF]</sup>
+- [정말 쉬워진 HTTP](https://www.jmarshall.com/easy/http/)
 - [MDN web docs - An overview of HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview)
-- [LWP in Action - Chapter 2. Web Basics](http://lwp.interglacial.com/ch02_01.htm)
-- [HTTP and everything you need to know about it](https://medium.com/faun/http-and-everything-you-need-to-know-about-it-8273bc224491)
+- [작동중인 LWP - 2장. 웹 기초](http://lwp.interglacial.com/ch02_01.htm)
+- [HTTP 와 이에 대해 알아야 할 모든 것](https://medium.com/faun/http-and-everything-you-need-to-know-about-it-8273bc224491)
 
-I also recommend to read:
+또한 다음을 읽는것이 좋습니다:
 
-- [Mini HTTP guide for developers](https://charemza.name/blog/posts/abstractions/http/http-guide-for-developers/)
-- [10 Great Web Performance Blogs](https://www.aaronpeters.nl/blog/10-great-web-performance-blogs/)
+- [개발자를 위한 HTTP 미니 가이드](https://charemza.name/blog/posts/abstractions/http/http-guide-for-developers/)
+- [10개의 훌륭한 웹 퍼포먼스 블로그](https://www.aaronpeters.nl/blog/10-great-web-performance-blogs/)
 
-We have some interesting books:
+몇가지 흥미로운 책들:
+- [HTTP: 최종 가이드](https://www.amazon.com/HTTP-Definitive-Guide-Guides-ebook/dp/B0043D2EKO)
+- [고성능 브라우저 네트워킹](https://hpbn.co/)
 
-- [HTTP: The Definitive Guide](https://www.amazon.com/HTTP-Definitive-Guide-Guides-ebook/dp/B0043D2EKO)
-- [High Performance Browser Networking](https://hpbn.co/)
-
-Look also at the [useful video resources](#useful-video-resources) section of this chapter. And finally look at [this](https://github.com/bigcompany/know-your-http) amazing series of A1-sized posters about the HTTP protocol.
+이 장의[유용한 비디오 리소스](#useful-video-resources) 도 보세요. 마지막으로 [**이**](https://github.com/bigcompany/know-your-http) HTTP 프로토콜에 관한 놀라운 시리즈의 A1사이즈 포스터도 보세요
 
 #### Features and architecture
 
