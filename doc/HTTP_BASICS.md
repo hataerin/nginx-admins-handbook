@@ -1,9 +1,9 @@
-# HTTP Basics
+# HTTP 기초
 
-Go back to the **[Table of Contents](https://github.com/trimstray/nginx-admins-handbook#table-of-contents)** or **[What's next?](https://github.com/trimstray/nginx-admins-handbook#whats-next)** section.
+ **[목차](https://github.com/trimstray/nginx-admins-handbook#table-of-contents)** 또는 **[다음단계](https://github.com/trimstray/nginx-admins-handbook#whats-next)** 로 돌아갈 수 있습니다.
 
-- **[≡ HTTP Basics](#http-basics)**
-  * [Introduction](#introduction)
+- **[≡ HTTP 기초](#http-basics)**
+  * [소개](#introduction)
   * [Features and architecture](#features-and-architecture)
   * [HTTP/2](#http2)
     * [How to debug HTTP/2?](#how-to-debug-http2)
