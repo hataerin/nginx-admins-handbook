@@ -4,7 +4,7 @@
 
 - **[≡ HTTP 기초](#http-basics)**
   * [소개](#소개)
-  * [기능 및 아키텍처](#features-and-architecture)
+  * [기능 및 아키텍처](#기능 및 아키텍처)
   * [HTTP/2](#http2)
     * [HTTP/2를 디버그하는 방법은 무엇인가요?](#how-to-debug-http2)
   * [HTTP/3](#http3)
@@ -64,23 +64,24 @@ HTTP 프로토콜을 꼼꼼하게 설명하지 않을 것이므로 이것을 소
 
 이 장의[유용한 비디오 리소스](#useful-video-resources) 도 보세요. 마지막으로 [**이**](https://github.com/bigcompany/know-your-http) HTTP 프로토콜에 관한 놀라운 시리즈의 A1사이즈 포스터도 보세요
 
-#### Features and architecture
+#### 기능 및 아키텍처
 
-The HTTP (1.0/1.1 = h1) protocol is a request/response protocol based on the client/server based architecture where web browsers, robots and search engines, etc. act like HTTP clients, and the Web server acts as a server. This is HTTP's message-based model. Every HTTP interaction includes a request and response.
+HTTP (1.0/1.1 = h1) 프로토콜은 웹 브라우저, 로봇 및 검색엔진 등이 HTTP 클라이언트처럼 작동하고 웹서버가 서버로 작동하는 서버/클라이언트 기반 아키텍처에 기반을 둔 요청/응답 프로토콜입니다. 이것은 HTTP의 메세지 기반 모델입니다. 모든 HTTP 상호작용은 요청과 응답을 포함합니다.
 
-By its nature, HTTP is stateless. Stateless means that all requests are separate from each other. So each request from your browser must contain enough information on its own for the server to fulfill the request.
+본질적으로 HTTP는 무상태입니다. 무상태란 모든 요청들이 서로 분리되어있음을 의미합니다. 따라서 브라우저의 각 요청에는 서버가 요청을 수행할 수있는 충분한 정보를 포함하고있어야만 합니다. 
 
-Here is a brief explanation:
+다음은 간단한 설명입니다.
 
-- most often the HTTP communication uses the TCP protocol
+- 대부분의 경우 HTTP 통신은 TCP 프로토콜을 사용합니다.
 
-- the default port is TCP 80, but other ports can be used
+- 기본 포트는 TCP 80이지만 다른 포트를 사용할 수도 있습니다.
 
-- HTTP allow multiple requests and responses to be carried over a single (persistent) connection ([RFC 7230 - Persistence](https://tools.ietf.org/html/rfc7230#section-6.3) <sup>[IETF]</sup>)
+- HTTP를 사용하면 단일(영구) 연결을 통해 여러 요청 및 응답을 전달할 수 있습니다 ([RFC 7230 - 지속성](https://tools.ietf.org/html/rfc7230#section-6.3) <sup>[IETF]</sup>)
 
-- HTTP protocol is stateless (all requests are separate from each other)
 
-- each transaction of the message based model of HTTP is processed separately from the others
+- HTTP 프로토콜은 무상태입니다. (모든 요청은 서로 분리됨)
+
+- HTTP의 메세지 기반 모델의 각 트랜잭션은 다른 트랜잭션과 별도로 처리됩니다. 
 
 - the HTTP client, i.e., a browser initiates an HTTP request and after a request is made, the client waits for the response
 
